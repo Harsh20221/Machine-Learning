@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 ##* Importing the dataset
-dataset = pd.read_csv("Salary_Data.csv")
+dataset = pd.read_csv('/Users/harshkumar/Machine Learning/Preprocessing & Simple Linear Regression/Salary_Data.csv')##! Add Full Path by copying pathnname 
 x=dataset.iloc[:,:-1].values
 y=dataset.iloc[:,-1].values
 ##* Splitting the dataset into the Training set and Test set
