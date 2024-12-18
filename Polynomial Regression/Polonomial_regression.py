@@ -48,4 +48,4 @@ print(lin_reg.predict([[6.5]])) ##?To get a Prediction  for position 6.5(betwee
 #* Predicting According to the polynomial regressioon Model 
 print(lin_reg2.predict(poly_reg.fit_transform([[6.5]]))) ## THIS IS HOW WE CAN GET THE PREDICTED VALUE AS PER POLYNOMIAL REGRESSION FOR A PARTICULAR SPOT
 ##/ This will be more accurate prediction 
-##!! IF THE PRINT STATEMENT IS NOT DISPLAYING IN THE TERMINAL THEN REMOVE ABOVE Show function in the polynomial regression model 
+##!! IF THE PRINT STATEMENT IS NOT DISPLAYING IN THE TERMINAL THEN REMOVE ABOVE Show function in the polynomial regression  model otherwise output will not be displayed 
