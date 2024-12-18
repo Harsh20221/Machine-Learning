@@ -1,9 +1,9 @@
-#importing libraries
+#importing 
 import  numpy as np
 import matplotlib as plt
 import pandas as pd 
 #*READING CSV 
-dataset = pd.read_csv(r'C:\MAchine Learning\Machine-Learning\Multiple Regression\50_Startups.csv')
+dataset=pd.read_csv("/Users/harshkumar/Machine Learning/Multiple Regression/50_Startups.csv")
 x=dataset.iloc[:,:-1].values
 y=dataset.iloc[:,-1].values
 #*ENCODING -- CONVERTING EVERY COLUMN TO NUMERALS 
