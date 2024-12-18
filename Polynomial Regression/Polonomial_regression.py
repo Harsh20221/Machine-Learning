@@ -39,7 +39,7 @@ plt.figure("Polynomial Regression")##!!VERY IMPORTANT TO MENTION FIGURE IF YOU W
 plt.scatter(x,y,color='Red') ##? The scatter function will remain the same as we are displaying the actual data and hence this will also remain same in our polynomial regression model 
 plt.plot(x,lin_reg2.predict(X_poly),color='Blue') ### Here we are predicting and showing results according to the polynomial regression , the x axis will remain x  as like the linear regression but for y axis where we are making predictions will be different because in y axis we will enter polynomial regressor variable  instead of just entering x to make prediction 
 plt.title("SALARY PREDICTION (Polynomial Regression)")
-plt.xlabel('Position')
+plt.xlabel('Position Level')
 plt.ylabel('Salary')
 plt.show()
 
