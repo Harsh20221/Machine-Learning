@@ -31,7 +31,6 @@ plt.ylabel('Salary')
 #/Using x_test for plotting the regression line would not make sense because the line doesn't "know" the test data; it's solely based on the training data
 
 ##* Visualising on Real  Set 
-
 plt.figure("Test Set")
 plt.scatter(x_test,y_test,color='red')###?Plots the actual test data points in red.
 plt.plot(x_train,regressor.predict(x_train),color='blue')###?Same Regression Line: Uses the regression line derived from the training data.
