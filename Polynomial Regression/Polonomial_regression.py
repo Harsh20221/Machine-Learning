@@ -17,7 +17,8 @@ lin_reg= LinearRegression()
 lin_reg.fit(x,y)
 
 #* Training Polynomial regression Model on the whole dataset 
-poly_reg=PolynomialFeatures(degree=2)##? Means we want a polynomial regressor with 2 matrix of features
+poly_reg=PolynomialFeatures(degree=6)##? Means we want a polynomial regressor with 2 matrix of features
+##/ Here  as we increase the degree more from 2 to even higher then we will have much more accurate results , Our predictions will be more aligned with the actual results , For ex- chossing degree 6 will almost align the regression curve(Predicted values Curve ) in a picture perfect way with the actual scatter plot containing actual values 
 X_poly=poly_reg.fit_transform(x) ##? This creates the feature matrix of polynomial regression(The resulting feature matrix with added polynomial terms, enabling the regression model to capture nonlinear relationships.) 
 #* Creating a new Linear Regression Model out of the values recieved from the polynimial regressor 
 lin_reg2=LinearRegression()
