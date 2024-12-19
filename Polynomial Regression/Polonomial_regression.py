@@ -41,7 +41,7 @@ plt.ylabel('Salary')
 
 ###/We can see that the polynomial Regression  Plot is much more aligned with the actual values of the datasheet and the predictions are  more accurate then  by just using linear regression 
 
-#* Predicting  Salary for position 6.5 according tro linear Regression Model 
+#* Predicting  Salary for position 6.5 according to linear Regression Model 
 print(lin_reg.predict([[6.5]])) ##?To get a Prediction  for position 6.5(between country manager and region manager ) we need to put the position value in a 2d array as it expects a 2d array , The First dimension in the 2d array is the row and second dimension is the column 
 ###/ You can see the result will be 330k which is a very high and very odd value , The prediction using linear regression is very vague 
 
