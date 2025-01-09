@@ -11,7 +11,7 @@ from sklearn.ensemble import RandomForestRegressor
 regressor=RandomForestRegressor(n_estimators=10,random_state=0)##?This parameter specifies the number of trees in the forest. In this case, n_estimators=10 means that the random forest will consist of 10 decision trees. Increasing the number of trees can improve the model's performance but also increases computational cost.
 ##?random_state=0 ensures that the results are reproducible, meaning that running the code multiple times will produce the same results.
 ##?random_state: This parameter controls the randomness of the bootstrapping of the samples used when building trees. Setting
-regressor.fit(x,y) ##?Starting up the Regression 
+regressor.fit(x,y) ###fit() is a function that will fit an equation or model to data
 ###* Draw the plots 
 X_grid = np.arange(min(x), max(x), 0.01) ##? This is to make the curve more smoother 
 X_grid = X_grid.reshape((len(X_grid), 1))##? To make curve more smoother we also reshape 
