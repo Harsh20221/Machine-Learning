@@ -14,7 +14,7 @@ from sklearn.preprocessing import StandardScaler
 sc_x=StandardScaler()
 sc_y=StandardScaler()
 X=sc_x.fit_transform(x) ###!! VERY IMPORTANT TO ASSIGN THE NOW Fit transformed data to a new variable else if you assign it to the old x then  it will create errors 
-Y=sc_y.fit_transform(y)
+Y=sc_y.fit_transform(y)####! HERE We are applying feature scaling on x and y because we have not split the data into  tRAINING AND TEST SET , ONCE WE SPLIT IT then we will only apply it in the training and test set of x or y 
 print(X)
 print(Y)
 
