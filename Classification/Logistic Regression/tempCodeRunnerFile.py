@@ -1,1 +1,1 @@
-print(y_predict)
+plt.show()
