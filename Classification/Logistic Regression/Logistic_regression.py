@@ -24,6 +24,11 @@ classifier.predict(sc.transform([[30,87000]])) ##!!Make sure you always uise sc.
 ##? In the above code snippet we are predicting fore someone with age=30 and salary = 87000 whether he/she will buy the car or not 
 ####* Predicting the Test Set Results 
 y_predict=classifier.predict(x_test)
-print(y_predict) ##? This will print the prediction 
-print (np.concatenate( (y_predict. reshape (len(y_predict) ,1), y_test.reshape(len(y_test) ,1)), 1))##?The active selection is a Python statement that prints the result of concatenating two arrays, y_predict and y_test, along the second axis (columns). This is achieved using the np.concatenate function from the NumPy library, which joins a sequence of arrays along an existing axis.                                                    
+""" print(y_predict) """ ##? This will print the prediction 
+print(np.concatenate( (y_predict. reshape (len(y_predict) ,1), y_test.reshape(len(y_test) ,1)), 1))##?The active selection is a Python statement that prints the result of concatenating two arrays, y_predict and y_test, along the second axis (columns). This is achieved using the np.concatenate function from the NumPy library, which joins a sequence of arrays along an existing axis.                                                    
 ##?First, both y_predict and y_test arrays are reshaped to be two-dimensional with a single column. The reshape method is used for this purpose, where len(y_predict) and len(y_test) specify the number of rows, and 1 specifies the single column. This transformation ensures that both arrays have compatible shapes for concatenation along the specified axis
+###In the Given output of the above following statement the first column will show the prediction of the model while the next column will show  the actual result 
+###* Making the confusion Matrix  to find the accuracy of the model 
+from sklearn.metrics import confusion_matrix
+cm=confusion_matrix(y_test,y_predict)###!!!!!!Make sure you do not take x_test here or eklse it will not work because we are predicting for y 
+print(cm)
