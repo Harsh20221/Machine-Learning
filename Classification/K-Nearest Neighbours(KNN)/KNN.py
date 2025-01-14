@@ -3,6 +3,8 @@
 ##(THE PLOT OF THIS METHOD IS COMPUTE INTENSIVE )
 ##* Initializing the Dataset
 import pandas as pd
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import numpy as np
 dataset = pd.read_csv('Social_Network_Ads.csv')
