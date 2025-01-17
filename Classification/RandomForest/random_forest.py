@@ -12,7 +12,7 @@ x_train = sc.fit_transform(x_train)
 X_test = sc.transform(X_test)
 
 from sklearn.ensemble import RandomForestClassifier 
-classifier=RandomForestClassifier(n_estimators=100,criterion='entropy',random_state=0) ###? This estimators help us define the power of the model or we can say the resolution of the model 
+classifier=RandomForestClassifier(n_estimators=100,criterion='entropy',random_state=0) ###? This estimators help us define the No of Trees in the model which can improve the model's Performence and this criterion determines the function used to measure the quality of a split in the decision , other option besides entropy is 'gini'
 classifier.fit(x_train,y_train)
 y_pred = classifier.predict(X_test)
 print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
