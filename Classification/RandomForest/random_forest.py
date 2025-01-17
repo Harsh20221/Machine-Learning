@@ -1,4 +1,4 @@
-import numpy as np
+import numpy as np  
 import matplotlib.pyplot as plt
 import pandas as pd
 dataset = pd.read_csv('Social_Network_Ads.csv')
@@ -10,15 +10,18 @@ from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 x_train = sc.fit_transform(x_train)
 X_test = sc.transform(X_test)
+
 from sklearn.ensemble import RandomForestClassifier 
-classifier=RandomForestClassifier()
+classifier=RandomForestClassifier(n_estimators=100,criterion='entropy',random_state=0) ###? This estimators help us define the power of the model or we can say the resolution of the model 
 classifier.fit(x_train,y_train)
 y_pred = classifier.predict(X_test)
 print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
+
 from sklearn.metrics import confusion_matrix, accuracy_score
 cm = confusion_matrix(y_test, y_pred)
 print(cm)
 accuracy_score(y_test, y_pred)
+
 ###* Training Set 
 from matplotlib.colors import ListedColormap
 X_set, y_set = sc.inverse_transform(x_train), y_train
