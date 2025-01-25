@@ -3,12 +3,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 dataset=pd.read_csv('Mall_Customers.csv')
 x=dataset.iloc[:,[3,4]].values
-import scipy.cluster.hierarchy as sch
+###*Drawing the Dendogram   
+import scipy.cluster.hierarchy as sch   ##?The Dendograms are used to represent the distances between the points
 dendogram=sch.dendrogram(sch.linkage(x,method='ward')) ##/ The ward method refers to the minimum variance method
-plt.title('Dendogram')
+plt.title('Dendrogram')
 plt.xlabel('Customers')
 plt.ylabel('Euclidian Distance')
-plt.show()
+plt.show()##It is quite intresting we do not need to use plt.plot or plt.predict or give anything to plt  we just write the title and  labels and use plt.show to get the dendrogram 
 ##*Predicting the clusters
 from sklearn.cluster import AgglomerativeClustering
 hc = AgglomerativeClustering(n_clusters = 5,  linkage = 'ward')###!!!DO NOT ADD Affinity parameter in the AgglomerativeClustering because adding it will generate errors
