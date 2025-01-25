@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
-
 dataset=pd.read_csv('Mall_Customers.csv')
 x=dataset.iloc[:,[3,4]].values
 import scipy.cluster.hierarchy as sch
