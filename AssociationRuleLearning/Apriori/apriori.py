@@ -19,14 +19,14 @@ rules=apriori(transactions=transactions,min_support=0.003,min_confidence=0.2,min
 results=list(rules) ##?Copying the rules to results 
 def inspect(results):
     lhs         = [tuple(result[2][0][0])[0] for result in results] ##?THIS [2][0[0]... IS USED TO ACCESS THE CURRECT PARAMETERS FROM THE RESULTS LIST 
-    rhs         = [tuple(result[2][0][1])[0] for result in results]
+    rhs         = [tuple(result[2][0][1])[0] for result in results]##?The way we are accessing the parameters is because the parameters are in the form of a tuple and we are accessing the first element of the tuple , the first element of the tuple will be the product that the customer has bought , the second element will be the product that the customer has also bought after buying the first product, the third element will be the support , the fourth element will be the confidence and the fifth element will be the lift
     supports    = [result[1] for result in results]
     confidences = [result[2][0][2] for result in results]
     lifts       = [result[2][0][3] for result in results]
     return list(zip(lhs, rhs, supports, confidences, lifts))
 resultsinDataFrame = pd.DataFrame(inspect(results), columns = ['Left Hand Side', 'Right Hand Side', 'Support', 'Confidence', 'Lift'])
 ###*Sorting all the rules in the table by lift parameter 
-resultsinDataFrame.nlargest(n=10,columns='Lift')
+resultsinDataFrame.nlargest(n=10,columns='Lift')##?here n is the number of rules that we want to display , we are displaying 10 rules here
 print(resultsinDataFrame)#####?THIS WILL DISPLAY THE RESULT --- THE LEFT HAND SIDE WILL HAVE THE PRODUCT THAT THE CUSTOMER FIRST BOUGHT AND RIGHT HAND SIDE WILL HAVE THE PRODUCT THAT CUSTOMER HAS ALSO BOUGHT WHEN HE/SHE HAS BOUGHT THE FIRST PRODUCT , THE CONFIDENCES WILL HAVE THE PERCENTAGE OF CUSTOMER FOR EVERY RULE IN point 
 
 
