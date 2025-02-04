@@ -27,12 +27,11 @@ for n in range (0,N):
         no_of_selections[ad] += 1
         reward=dataset.values[n,ad] 
         sum_of_rewards[ad]=sum_of_rewards[ad]+reward
-        total_reward=total_reward+reward      
-            
+        total_reward=total_reward+reward               
     #####* Plotting the Final Graph ##############
-    plt.hist(ads_selected)
-    plt.title('Histogram of ads Selected ')
-    plt.xlabel('Ads')
-    plt.ylabel('Number of times each ad was selected ')
-    plt.show()
+plt.hist(ads_selected)
+plt.title('Histogram of ads Selected ')
+plt.xlabel('Ads')
+plt.ylabel('Number of times each ad was selected ')
+plt.show()
     
