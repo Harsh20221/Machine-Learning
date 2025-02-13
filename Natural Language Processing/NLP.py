@@ -20,7 +20,8 @@ for i in range(0,1000):
     reviews= [ps.stem(word) for word in  reviews if not word in set(stopwords.words('english'))] ##?WE ARE APPLYING STEMMING HERE , we have enclosed this in the format of list for easier conversion , we'll convert them back to string in the next step 
     reviews=' '.join(reviews) 
     corpus.append(reviews)##? Finally appending all the clean reviews to the corpus array 
-    
+print(corpus)
+ 
 
 
 
