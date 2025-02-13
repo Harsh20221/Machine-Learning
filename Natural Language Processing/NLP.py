@@ -8,13 +8,20 @@ dataset=pd.read_csv('Restaurant_Reviews.tsv',delimiter='\t',quoting=3) ###? The 
 import re   ###?The stemming will simplify the sentences , Whether you say " I loved this  restaurant or I love this restaurant , the meaning remains  the same so we transform that loved to love
 import nltk    ###?The initial step in our cleaning process will involve removing all punctuation marks from our code
 nltk.download('stopwords')
-from nltk.corpus import stopwords
-from nltk.stem.porter import PorterStemmer
+from nltk.corpus import stopwords###/This set of stopwords will contain all the words of english and based on this set we will omit other words for stemming 
+from nltk.stem.porter import PorterStemmer###/ This class will be going to be used for stemming
 corpus=[]##?corpus will store the cleaned reviews
 for i in range(0,1000):
     reviews=re.sub('[^a-zA-Z]',' ',dataset['Review'][i])##?Here we'll mention that we will be replacing the commas and other punctuations with space , the '[^a-zA-Z]' means that we are telling telling it to remove everything except letters from a-z & A-Z both lowercase and uppercase ,The Third Argument in the re.sub will tell where to pull the data from 
     reviews=reviews.lower ##? This will convert all the reviews to lowercase
     reviews=reviews.split()##? This will split the reviews
+    ####/ ----- NOW WE WLL BE DOING STEMMING THAT WILL SIMPLIFY EACH OF THE WORDS INTO THEIR SIMPLER FORM , For ex--The stemming will simplify the sentences , Whether you say " I loved this  restaurant or I love this restaurant , the meaning remains  the same so we transform that loved to love
+    ps=PorterStemmer()
+    reviews= [ps.stem(word) for word in  reviews if not word in set(stopwords.words('english'))] ##?WE ARE APPLYING STEMMING HERE , we have enclosed this in the format of list for easier conversion , we'll convert them back to string in the next step 
+    reviews=' '.join(reviews) 
+    corpus.append(reviews)##? Finally appending all the clean reviews to the corpus array 
+    
+
 
 
 
