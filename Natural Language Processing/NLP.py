@@ -34,7 +34,19 @@ cv = CountVectorizer(max_features=1500)
 x=cv.fit_transform(corpus).toarray()
 y=dataset.iloc[:,-1].values
 
-
+#####* TRaining our model based on Naiive Bais 
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y)
+from sklearn.naive_bayes import GaussianNB
+classifier=GaussianNB()
+classifier.fit(x_train,y_train)
+y_pred=classifier.predict(x_test)
+print(np.concatenate((y_pred.reshape(len(y_pred),1),y_test.reshape(len(y_test),1)),1))##? In the results vector the left one is the predicted value and right one is the actual value , While one stands for positive review but zero stands for negative review 
+###*Printing Confusion Matrix 
+from sklearn.metrics import confusion_matrix, accuracy_score
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+accuracy_score(y_test, y_pred)
 
 
 
