@@ -22,6 +22,15 @@ from sklearn.preprocessing import StandardScaler
 sc=StandardScaler()
 x_train=sc.fit_transform(x_train)
 x_test=sc.transform(x_test) ###?When sc.transform(x_test) is called, the test data is scaled using the same mean and standard deviation that were computed from the training set. This ensures that the test data is transformed in the same way as the training data.
+###* Initialize the TensorFlow Model 
+ann=tf.keras.models.Sequential()
+##* Adding Primary Hidden Layer
+ann.add(tf.keras.layers.Dense(units=6,activation='relu'))
+#* Adding  Secondary hidden layer 
+ann.add(tf.keras.layers.Dense(units=6,activation='relu'))
+##* Adding Output Layer
+ann.add(tf.keras.Dense(units=1,activation='sigmoid'))
+
 
 
 
