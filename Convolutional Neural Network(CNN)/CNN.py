@@ -66,7 +66,7 @@ else:
 ###*Making a Single Prediction
 import numpy  as np 
 from keras.preprocessing import image  #type:ignore
-test_image=image.load_img('dataset/single_prediction/cat.4415.jpg',target_size=(150,150))
+test_image=image.load_img('dataset/single_prediction/cat.4400.jpg',target_size=(150,150))##?The Target size will convert the image that we wanna identify dimensions to match with the training images dimension
 test_image=image.img_to_array(test_image)##?THE predict method expects the input in form of an array so we need to convert the input image that we are testing our model on in form of an Array
 test_image=np.expand_dims(test_image,axis=0)##?Adding extra dimension in our image because our  model expects a test image inside a  batch , by axis=0 we mean we want the extra dimension to  be the first one 
 result = cnn.predict(test_image)
