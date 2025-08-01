@@ -15,7 +15,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 import nltk    ###?The initial step in our cleaning process will involve removing all punctuation marks from our code
 nltk.download('stopwords')
 from nltk.corpus import stopwords###/This set of stopwords will contain all the words of english and based on this set we will omit other words for stemming 
-from nltk.stem.porter import PorterStemmer###/ This class will be going to be used for stemming
+from nltk.stem.porter import PorterStemmer###/ This class will be going to be used for stemming to simplify the sentences
 corpus=[]##?corpus will store the cleaned reviews
 for i in range(0,1000):
     reviews=re.sub('[^a-zA-Z]',' ',dataset['Review'][i])##?Here we'll mention that we will be replacing the commas and other punctuations with space , the '[^a-zA-Z]' means that we are telling telling it to remove everything except letters from a-z & A-Z both lowercase and uppercase ,The Third Argument in the re.sub will tell where to pull the data from 
@@ -29,7 +29,7 @@ for i in range(0,1000):
 print(corpus)
  
 ####* Creating Bag of Words Model 
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer ##?Count vectorizer will convert the words to a vector which can be processed by the model
 cv = CountVectorizer(max_features=1500)
 x=cv.fit_transform(corpus).toarray()
 y=dataset.iloc[:,-1].values
