@@ -1,6 +1,5 @@
-## Speech Of DR APJ Abdul Kalam
-###* In this exercise , We are learning to apply stopwords in the sentences 
-paragraph = """I have three visions for India. In 3000 years of our history, people from all over 
+import nltk
+corpus=paragraph = """I have three visions for India. In 3000 years of our history, people from all over 
                the world have come and invaded us, captured our lands, conquered our minds. 
                From Alexander onwards, the Greeks, the Turks, the Moguls, the Portuguese, the British,
                the French, the Dutch, all of them came and looted us, took over what was ours. 
@@ -23,18 +22,17 @@ paragraph = """I have three visions for India. In 3000 years of our history, peo
                space, Professor Satish Dhawan, who succeeded him and Dr. Brahm Prakash, father of nuclear material.
                I was lucky to have worked with all three of them closely and consider this the great opportunity of my life. 
                I see four milestones in my career"""
-from nltk.stem import PorterStemmer
+from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 import nltk
 nltk.download('stopwords')
 stopwords.words('english')
-stemmer=PorterStemmer()
+lemmatizer=WordNetLemmatizer()
 sentences=nltk.sent_tokenize(paragraph) ##? First we are Tokenizing our paragraph means breaking  whole paragraph into smaller tokens 
 for i in range(len(sentences)):##?Here in This step we are first using stopwords to remove less useful words like-- i , him , her , he , she 
+    nltk.download('averaged_perceptron_tagger_eng')
     words=nltk.word_tokenize(sentences[i])##/IN CASE OF Stemming we can also use lemmitizer
-    words=[stemmer.stem(word) for word in words if word not in set(stopwords.words('english'))]##? Here after Applying stopwords and  filtering those extra words we are then applying stemming to  shorten or replace complex form of word with simple forms like -- I was drivng to I was drive , etc 
-    sentences[i]=' '.join(words)#? converting all the list of words into sentences, and storing in the same sentences 
-
-
-                        
-               
+    words=[word for word in words if word not in set(stopwords.words('english'))] 
+    pos_tag=nltk.pos_tag(words)
+    print(pos_tag) ##? The tagger helps to classify  the words into different parts of speech like noun, verb, adjective, etc.
+    """ sentences[i]=' '.join(words) """ 
