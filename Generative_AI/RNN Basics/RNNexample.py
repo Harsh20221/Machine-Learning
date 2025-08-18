@@ -1,3 +1,6 @@
+
+##* This is a small example of RNN on a single sentence without the datasdet 
+
 from tensorflow.keras.preprocessing.text import one_hot  # type: ignore
 text=['the glass of milk',
      'the glass of juice',
