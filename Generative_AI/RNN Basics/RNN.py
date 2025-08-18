@@ -1,5 +1,5 @@
 
-###* Initializing the Simple RNN and processing the data using RNN---Here in tghis file we are working on the IMDB dataset and we are using RNN Learning principle to classify the reviews into  Positive or Negative , This is he main project 
+###* Initializing the Simple RNN and processing the data using RNN---Here in tghis file we are working on the IMDB dataset and we areb using RNN Learning principle to classify the reviews into  Positive or Negative 
 import os 
 import numpy as np
 import tensorflow as tf
@@ -13,11 +13,11 @@ print(f'Training Data Shape: {X_train.shape}, Training labels shape : {Y_train.s
 print(f'Testing Data Shape: {X_test.shape}, Testing labels shape : {Y_test.shape}')##? Doing the above for test data as well 
 print(X_train[0],Y_train[0])
 from tensorflow.keras.preprocessing import sequence #type:ignore
-max_length=200  #!! Reduced from 500 to 200 as most reviews don't need 500 words to convey sentiment
+max_length=500  #!! Reduced from 500 to 200 as most reviews don't need 500 words to convey sentiment
 X_train=sequence.pad_sequences(X_train, maxlen=max_length, truncating='post', padding='post')
 X_test=sequence.pad_sequences(X_test, maxlen=max_length, truncating='post', padding='post')
 
-###*THIS WILL CHECK FOR AVAILABLE MODELS AND IF IT FINDS ONE Exist  THEN IT'LL USE THAT TO PREDICT THE RESULTS 
+###*THIS WILL CHECK FOR AVAILABLE MODELS AND IF found it'll 
 if os.path.exists('/home/harsh/Machine-Learning/Generative_AI/RNN Basics/simple_Rnnnew_imdb.h5'):
     print(f"Loading existing model from {'/home/harsh/Machine-Learning/Generative_AI/RNN Basics/simple_Rnnnew_imdb.h5'}...")
     model = tf.keras.models.load_model('/home/harsh/Machine-Learning/Generative_AI/RNN Basics/simple_Rnnnew_imdb.h5')
@@ -50,7 +50,7 @@ else:
     validation_split=0.2,
     callbacks=[earlystopping]
  )
-
+model.save('simple_Rnnnew_imdb.h5')
 
 # Load the IMDB dataset word index
 word_index = imdb.get_word_index()
@@ -79,7 +79,7 @@ def predict_sentiment(review):
 
 # Step 4: User Input and Prediction
 # Example review for prediction
-example_review = "This movie was ! The acting was great and the plot was thrilling."
+example_review = "This movie was bad The acting was also bad  and the plot was bad."
 
 sentiment,score=predict_sentiment(example_review)
 
