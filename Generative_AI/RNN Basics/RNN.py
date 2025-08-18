@@ -52,15 +52,18 @@ else:
  )
 model.save('simple_Rnnnew_imdb.h5')
 
+##* Here We are doing the Predictions
+##?Even though we did this preprocessing for the training data, we must repeat it for any new data you want to predict on. The model only understands numbers, not raw text
 # Load the IMDB dataset word index
 word_index = imdb.get_word_index()
 reverse_word_index = {value: key for key, value in word_index.items()}
 
 # Step 2: Helper Functions
-# Function to decode reviews
+#? Function to decode reviews,This is here for  visualization purposes only and not functional in this code , Since the Imdb dataset stores the reviews in form of numbers so we need decoding if we wanna see those reviews as text
 def decode_review(encoded_review):
     return ' '.join([reverse_word_index.get(i - 3, '?') for i in encoded_review])
 
+#?We are doing preprocessing again because --The model was trained on numerical data (word indices), not raw textEach review needs to be the exact same length as what the model expectsWe need to use the same word-to-index mapping that was used during training
 # Function to preprocess user input
 def preprocess_text(text):
     words = text.lower().split()
