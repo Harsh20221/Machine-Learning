@@ -18,38 +18,39 @@ X_train=sequence.pad_sequences(X_train, maxlen=max_length, truncating='post', pa
 X_test=sequence.pad_sequences(X_test, maxlen=max_length, truncating='post', padding='post')
 
 ###*THIS WILL CHECK FOR AVAILABLE MODELS AND IF found it'll 
-if os.path.exists('/home/harsh/Machine-Learning/Generative_AI/RNN Basics/simple_Rnnnew_imdb.h5'):
-    print(f"Loading existing model from {'/home/harsh/Machine-Learning/Generative_AI/RNN Basics/simple_Rnnnew_imdb.h5'}...")
-    model = tf.keras.models.load_model('/home/harsh/Machine-Learning/Generative_AI/RNN Basics/simple_Rnnnew_imdb.h5')
+model_path = 'simple_Rnnnew_imdb.h5'
+
+if os.path.exists(model_path):
+    print(f"Loading existing model from {model_path}...")
+    model = tf.keras.models.load_model(model_path)
     print("Model loaded successfully.")
 
-
 else:
-##* Train Simple RNN 
- model = Sequential()
- model.add(Embedding(max_features, 128, input_length=max_length))
- model.add(SimpleRNN(128, activation='relu'))
- model.add(Dense(1, activation='sigmoid')) ###? The dense layer is like a output layer 
+    ##* Train Simple RNN 
+    model = Sequential()
+    model.add(Embedding(max_features, 128, input_length=max_length))
+    model.add(SimpleRNN(128, activation='relu'))
+    model.add(Dense(1, activation='sigmoid')) ###? The dense layer is like a output layer 
 
-# Compile the model with appropriate optimizer and loss function for binary classification
- model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    # Compile the model with appropriate optimizer and loss function for binary classification
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
-# Build the model with explicit input shape
- model.build((None, max_length))
+    # Build the model with explicit input shape
+    model.build((None, max_length))
 
-# Show model summary
- model.summary()
+    # Show model summary
+    model.summary()
 
- from tensorflow.keras.callbacks import EarlyStopping #type:ignore
- earlystopping=EarlyStopping(monitor='val_loss',patience=5,restore_best_weights=True)
+    from tensorflow.keras.callbacks import EarlyStopping #type:ignore
+    earlystopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
 
- history=model.fit(
-    X_train,Y_train,
-    epochs=10,
-    batch_size=128,  # !!Increased batch size for faster training
-    validation_split=0.2,
-    callbacks=[earlystopping]
- )
+    history = model.fit(
+        X_train, Y_train,
+        epochs=10,
+        batch_size=128,  # !!Increased batch size for faster training
+        validation_split=0.2,
+        callbacks=[earlystopping]
+    )
 model.save('simple_Rnnnew_imdb.h5')
 
 ##* Here We are doing the Predictions
