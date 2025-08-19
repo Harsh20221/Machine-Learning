@@ -90,3 +90,21 @@ sentiment,score=predict_sentiment(example_review)
 print(f'Review: {example_review}')
 print(f'Sentiment: {sentiment}')
 print(f'Prediction Score: {score}')
+
+import streamlit as st
+st.title('IMDB REVIEW SENTIMENT ANALYSIS')
+st.write('Enter a Movie Review to classify it as Positive or Negative ')
+# user Input
+user_input=st.text_area('Movie Review ')
+if st.button('Classify'):
+     preprocessed_input=preprocess_text(user_input)
+     #*Make Prediction
+     prediction=model.predict(preprocessed_input)
+     sentiment='Positive' if prediction[0][0] >0.50 else 'Negative'
+     #*Display the Result
+     st.write(f'Sentiment:{sentiment}')
+     st.write(f'Prediction:{prediction[0][0]}')
+else:
+    st.write("Please enter a Review ")     
+     
+     
