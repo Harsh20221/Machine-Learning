@@ -18,7 +18,7 @@ X_train=sequence.pad_sequences(X_train, maxlen=max_length, truncating='post', pa
 X_test=sequence.pad_sequences(X_test, maxlen=max_length, truncating='post', padding='post')
 
 ###*THIS WILL CHECK FOR AVAILABLE MODELS AND IF found it'll 
-model_path = 'simple_Rnnnew_imdb.h5'
+model_path = 'simple_Rnnew_imdb.h5'
 
 if os.path.exists(model_path):
     print(f"Loading existing model from {model_path}...")
