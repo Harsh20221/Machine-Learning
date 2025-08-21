@@ -1,9 +1,9 @@
 #importing 
 import  numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import pandas as pd 
 #*READING CSV 
-dataset=pd.read_csv("/Users/harshkumar/Machine Learning/Multiple Regression/50_Startups.csv")
+dataset=pd.read_csv("50_Startups.csv")
 x=dataset.iloc[:,:-1].values
 y=dataset.iloc[:,-1].values
 #*ENCODING -- CONVERTING EVERY COLUMN TO NUMERALS 
@@ -29,4 +29,26 @@ print(np.concatenate((y_pred.reshape(len(y_pred), 1), y_test.reshape(len(y_test)
 
 ##/----Reshaping is crucial because it standardizes the dimensions of both arrays, making them compatible for concatenation. Without reshaping, attempting to concatenate one-dimensional arrays along a specified axis could lead to unexpected results or errors.
 ##/The overall effect of this concatenation is to create a combined array where each row presents a pair of predicted and actual values. This side-by-side arrangement is particularly useful for evaluating the performance of the regression model, as it allows for easy visual or programmatic comparison between what the model has predicted and the true values from the test set.
+
+# Plotting Training set results (Predicted vs Actual)
+plt.figure(figsize=(8,5))
+plt.scatter(y_train, regressor.predict(x_train), color='blue', label='Predicted vs Actual (Train)')
+plt.plot([y_train.min(), y_train.max()], [y_train.min(), y_train.max()], 'k--', lw=2, label='Perfect Prediction')
+plt.xlabel('Actual Profit (Train)')
+plt.ylabel('Predicted Profit (Train)')
+plt.title('Multiple Regression: Training Set Predictions')
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+# Plotting Test set results (Predicted vs Actual)
+plt.figure(figsize=(8,5))
+plt.scatter(y_test, y_pred, color='green', label='Predicted vs Actual (Test)')
+plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'k--', lw=2, label='Perfect Prediction')
+plt.xlabel('Actual Profit (Test)')
+plt.ylabel('Predicted Profit (Test)')
+plt.title('Multiple Regression: Test Set Predictions')
+plt.legend()
+plt.tight_layout()
+plt.show()
 
