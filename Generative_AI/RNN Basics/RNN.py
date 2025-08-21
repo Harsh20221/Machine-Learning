@@ -13,7 +13,7 @@ print(f'Training Data Shape: {X_train.shape}, Training labels shape : {Y_train.s
 print(f'Testing Data Shape: {X_test.shape}, Testing labels shape : {Y_test.shape}')##? Doing the above for test data as well 
 print(X_train[0],Y_train[0])
 from tensorflow.keras.preprocessing import sequence #type:ignore
-max_length=500  #!! Reduced from 500 to 200 as most reviews don't need 500 words to convey sentiment
+max_length = 200  # Most reviews don't need more than 200 words to convey sentiment
 X_train=sequence.pad_sequences(X_train, maxlen=max_length, truncating='post', padding='post')
 X_test=sequence.pad_sequences(X_test, maxlen=max_length, truncating='post', padding='post')
 
@@ -27,30 +27,42 @@ if os.path.exists(model_path):
 
 else:
     ##* Train Simple RNN 
-    model = Sequential()
-    model.add(Embedding(max_features, 128, input_length=max_length))
-    model.add(SimpleRNN(128, activation='relu'))
-    model.add(Dense(1, activation='sigmoid')) ###? The dense layer is like a output layer 
+    from tensorflow.keras.callbacks import EarlyStopping #type:ignore
+    
+    # Create a more robust model
+    model = Sequential([
+        Embedding(max_features, 128, input_length=max_length),
+        SimpleRNN(128, activation='relu', return_sequences=True),  # Add return_sequences for deeper network
+        SimpleRNN(64, activation='relu'),  # Additional RNN layer
+        Dense(32, activation='relu'),      # Additional dense layer
+        Dense(1, activation='sigmoid')
+    ])
 
-    # Compile the model with appropriate optimizer and loss function for binary classification
+    # Compile with the same settings
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-
-    # Build the model with explicit input shape
-    model.build((None, max_length))
-
+    
     # Show model summary
     model.summary()
 
-    from tensorflow.keras.callbacks import EarlyStopping #type:ignore
-    earlystopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+    # Add early stopping to prevent overfitting
+    early_stopping = EarlyStopping(
+        monitor='val_loss',
+        patience=3,
+        restore_best_weights=True
+    )
 
+    # Train with early stopping
     history = model.fit(
         X_train, Y_train,
-        epochs=10,
-        batch_size=128,  # !!Increased batch size for faster training
+        epochs=50,               # More epochs, but early stopping will prevent overfitting
+        batch_size=64,          # Smaller batch size for better generalization
         validation_split=0.2,
-        callbacks=[earlystopping]
+        callbacks=[early_stopping]
     )
+    
+    # Evaluate on test set
+    test_loss, test_accuracy = model.evaluate(X_test, Y_test, verbose=1)
+    print(f"\nTest accuracy: {test_accuracy:.4f}")
 model.save('simple_Rnnnew_imdb.h5')
 
 ##* Here We are doing the Predictions
@@ -67,9 +79,14 @@ def decode_review(encoded_review):
 #?We are doing preprocessing again because --The model was trained on numerical data (word indices), not raw textEach review needs to be the exact same length as what the model expectsWe need to use the same word-to-index mapping that was used during training
 # Function to preprocess user input
 def preprocess_text(text):
-    words = text.lower().split()
+    # Clean the text
+    text = text.lower().strip()
+    # Split into words
+    words = text.split()
+    # Convert words to indices, using 2 for unknown words
     encoded_review = [word_index.get(word, 2) + 3 for word in words]
-    padded_review = sequence.pad_sequences([encoded_review], maxlen=500)
+    # Pad to the same length as training data
+    padded_review = sequence.pad_sequences([encoded_review], maxlen=max_length)
     return padded_review
 
 def predict_sentiment(review):
