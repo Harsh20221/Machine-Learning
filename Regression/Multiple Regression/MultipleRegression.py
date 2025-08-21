@@ -38,7 +38,7 @@ plt.xlabel('Actual Profit (Train)')
 plt.ylabel('Predicted Profit (Train)')
 plt.title('Multiple Regression: Training Set Predictions')
 plt.legend()
-plt.tight_layout()
+plt.tight_layout() ##?The plt.tight_layout() function in Matplotlib is used to automatically adjust subplot parameters to ensure that elements like axes labels, titles, and tick labels do not overlap. It makes your plots look cleaner and more readable
 plt.show()
 
 # Plotting Test set results (Predicted vs Actual)
