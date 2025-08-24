@@ -88,11 +88,11 @@ def predict_next_word(model, tokenizer, text, max_sequence_len):
             return word
     return None
 ##*Testing the model by predicting the next word based on our own sentence 
-input_text="To be or not to be skilled "
+""" input_text=" Barn. How now Horatio? You tremble & look "
 print(f"Input text:{input_text}")
 max_sequence_len=model.input_shape[1]+1
 next_word=predict_next_word(model,tokenizer,input_text,max_sequence_len)
-print(f"Next Word PRediction:{next_word}")
+print(f"Next Word PRediction:{next_word}") """
 
 ##*Saving the Model
 model.save("next_word_lstm.h5")
@@ -106,6 +106,7 @@ st.title('Next Word predictor with LSTM ')
 input_text=st.text_input("Enter the Sequence of words","To be or not to")
 if st.button("Predict Next Word"):
     max_sequence_len=model.input_shape[1]+1#?Retrieve the max sequence length 
+    next_word = predict_next_word(model, tokenizer, input_text, max_sequence_len)
     st.write(f'Next Word: {next_word}')
     
 
