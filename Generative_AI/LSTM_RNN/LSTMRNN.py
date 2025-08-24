@@ -25,8 +25,8 @@ with open ('hamlet.txt','r') as file:
 tokenizer=Tokenizer()
 tokenizer.fit_on_texts([text])
 total_words=len(tokenizer.word_index)+1  ##?Tokenizing total words
-print(total_words)
-print(tokenizer.word_index)
+###print(total_words)
+###print(tokenizer.word_index)
 
 #*Create Input Sequences
 input_sequences=[]
@@ -37,7 +37,7 @@ for line in text.split('\n'):
         input_sequences.append(n_gram_sequence)
 #* Applying Pad Sequences to make sure we get all the sequences of equal length
 max_sequence_len=max(len(x) for x in input_sequences) ##? This line will find which sentence has the maximum length 
-print(max_sequence_len)        
+##print(max_sequence_len)        
 input_sequences=np.array(pad_sequences(input_sequences,maxlen=max_sequence_len,padding='pre')) ##? Here  we are applying the padding where we are making all sentence equal to the size of maximul length sentence by adding zeroes before the shorter sentences 
     
 #*Create Predictors and Labels and Divide into training and test sets 
@@ -87,7 +87,7 @@ def predict_next_word(model, tokenizer, text, max_sequence_len):
             return word
     return None
 ##*Testing the model by predicting the next word based on our own sentence 
-input_text="To be or not to be"
+input_text="To be or not to be skilled "
 print(f"Input text:{input_text}")
 max_sequence_len=model.input_shape[1]+1
 next_word=predict_next_word(model,tokenizer,input_text,max_sequence_len)
