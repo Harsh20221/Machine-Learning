@@ -88,11 +88,12 @@ def predict_next_word(model, tokenizer, text, max_sequence_len):
             return word
     return None
 ##*Testing the model by predicting the next word based on our own sentence 
-""" input_text=" Barn. How now Horatio? You tremble & look "
-print(f"Input text:{input_text}")
-max_sequence_len=model.input_shape[1]+1
-next_word=predict_next_word(model,tokenizer,input_text,max_sequence_len)
-print(f"Next Word PRediction:{next_word}") """
+### input_text=" Barn. How now Horatio? You tremble & look "
+###print(f"Input text:{input_text}")
+##max_sequence_len=model.input_shape[1]+1
+##next_word=predict_next_word(model,tokenizer,input_text,max_sequence_len)
+##print(f"Next Word PRediction:{next_word}") 
+
 
 ##*Saving the Model
 model.save("next_word_lstm.h5")
@@ -102,11 +103,11 @@ with open('tokenizer.pickle','wb') as handle:
     pickle.dump(tokenizer,handle,protocol=pickle.HIGHEST_PROTOCOL)
 ##* Creating a Streamlit App
 import streamlit as st  ###!!To run this app on WSL--streamlit run LSTMRNN.py --server.address 0.0.0.0
-st.title('Next Word predictor with LSTM ')
+st.title("Next Word predictor with LSTM")
 input_text=st.text_input("Enter the Sequence of words","To be or not to")
 if st.button("Predict Next Word"):
     max_sequence_len=model.input_shape[1]+1#?Retrieve the max sequence length 
-    next_word = predict_next_word(model, tokenizer, input_text, max_sequence_len) ##!!Make sure to not firget to add the predict ststement here again 
+    next_word = predict_next_word(model, tokenizer, input_text, max_sequence_len) ##!!Make sure to not firget to add the predict ststement here again
     st.write(f'Next Word: {next_word}')
     
 
