@@ -2,6 +2,7 @@ import nltk
 import pandas as pd 
 import numpy as np
 import os
+
 nltk.download('gutenberg')
 from nltk.corpus import gutenberg
 
@@ -99,8 +100,14 @@ model.save("next_word_lstm.h5")
 import pickle
 with open('tokenizer.pickle','wb') as handle:
     pickle.dump(tokenizer,handle,protocol=pickle.HIGHEST_PROTOCOL)
-
-
+##* Creating a Streamlit App
+import streamlit as st  ###!!To run this app on WSL--streamlit run LSTMRNN.py --server.address 0.0.0.0
+st.title('Next Word predictor with LSTM ')
+input_text=st.text_input("Enter the Sequence of words","To be or not to")
+if st.button("Predict Next Word"):
+    max_sequence_len=model.input_shape[1]+1#?Retrieve the max sequence length 
+    st.write(f'Next Word: {next_word}')
+    
 
 
 
