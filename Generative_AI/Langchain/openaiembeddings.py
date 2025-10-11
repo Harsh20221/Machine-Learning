@@ -19,3 +19,6 @@ embeddings=OpenAIEmbeddings(model="text-embedding-3-large")
 text="This is an example text for Open AI embeddings"
 query_result=embeddings.embed_query(text)
 print(query_result)
+###* Storing the generated Vectors from the API 
+from langchain_community.vectorstores import Chroma
+db=Chroma.from_documents()
