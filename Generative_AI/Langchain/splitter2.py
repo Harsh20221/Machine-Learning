@@ -1,3 +1,5 @@
+
+
 ###* Here we will be splitting the HTML into chunks
 from langchain_text_splitters import HTMLHeaderTextSplitter
 html_string="""<!DOCTYPE html>
@@ -32,5 +34,29 @@ headers_to_split_on=[
 
 html_splitter=HTMLHeaderTextSplitter(headers_to_split_on)
 html_header_splits=html_splitter.split_text(html_string)
-print(html_header_splits)
+""" print(html_header_splits) """
+
+###* Here we will also be splitting HTML into chunks by using URL instead of Provided HTML data
+url='https://plato.stanford.edu/entries/goedel/'
+html_splitter2=HTMLHeaderTextSplitter(headers_to_split_on) ##? Same as the above example just repeated for visualization purposes
+html_header_splits2=html_splitter2.split_text_from_url(url)
+""" print(html_header_splits2) """
+
+
+
+###* Here we will be splitting Json into Chunks  by using an API
+import json
+import requests
+json_data=requests.get("https://api.smith.langchain.com/openapi.json").json()
+from langchain_text_splitters import RecursiveJsonSplitter
+json_splitter=RecursiveJsonSplitter(max_chunk_size=100)
+json_chunks=json_splitter.split_json(json_data)
+""" for chunk in json_chunks:
+    print(chunk) """
+    
+###* The splitter can also output Documents 
+docs=json_splitter.create_documents(texts=[json_data])
+for doc in docs[:3]:
+    print(doc)
+    
 
