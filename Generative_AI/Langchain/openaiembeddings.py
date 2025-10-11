@@ -1,3 +1,6 @@
+
+##/ In this File we are just texting by applying simple open-Ai embeddings 
+
 import os
 from dotenv import load_dotenv
 
