@@ -13,4 +13,17 @@ os.environ["LANGCHAIN_TRACING_V2"]="true"
 from langchain_community.document_loaders import WebBaseLoader
 loader=WebBaseLoader("https://docs.langchain.com/langsmith/billing")
 docs=loader.load()
-print(docs)
+""" print(docs) """
+##* Splitting the Charecters
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+text_splitter=RecursiveCharacterTextSplitter(chunk_size=1000,chunk_overlap=200)
+documents=text_splitter.split(docs)
+###* Embeddinng the Splitted Chunks
+from langchain_openai import OpenAIEmbeddings
+embeddings=OpenAIEmbeddings()##?Initializing the embedder 
+##* Storing the embeddings in a Vector Store
+from langchain_community.vectorstores import FAISS
+vectorstoredb=FAISS.from_documents(documents,embeddings) ##? This will take the splitted content and apply the embeddings and store these embeddings in the vector database 
+print(vectorstoredb)
+
+
