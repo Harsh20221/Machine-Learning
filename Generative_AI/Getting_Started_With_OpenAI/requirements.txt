@@ -8,5 +8,5 @@ langchain-openai
 chromadb
 langchain-text-splitters
 sentence_transformers
-langchain_hugginggace
+langchain_huggingface
 faiss-gpu
