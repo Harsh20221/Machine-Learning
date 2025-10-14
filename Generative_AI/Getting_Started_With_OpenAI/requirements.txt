@@ -5,8 +5,9 @@ langchain_community
 pypdf
 beautifulsoup4
 langchain-openai
+langchain-core
 chromadb
 langchain-text-splitters
 sentence_transformers
 langchain_huggingface
-faiss-gpu
+faiss-cpu
