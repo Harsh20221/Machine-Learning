@@ -17,7 +17,7 @@ docs=loader.load()
 ##* Splitting the Charecters
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 text_splitter=RecursiveCharacterTextSplitter(chunk_size=1000,chunk_overlap=200)
-documents=text_splitter.split(docs)
+documents=text_splitter.split_documents(docs)
 ###* Embeddinng the Splitted Chunks
 from langchain_openai import OpenAIEmbeddings
 embeddings=OpenAIEmbeddings()##?Initializing the embedder 
