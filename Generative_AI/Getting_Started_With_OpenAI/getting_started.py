@@ -1,4 +1,5 @@
 
+###/--To Run onm MACOS-enable environment--"source openai_env/bin/activate"
 ##* Loading the necessary environment Variables
 import os
 from dotenv import load_dotenv
@@ -31,7 +32,7 @@ prompt=ChatPromptTemplate.from_messages([ ##!Make sure you don't type format_mes
 from langchain_core.output_parsers import StrOutputParser
 output_parser=StrOutputParser()
 chain=prompt|llm|output_parser
-response=chain.invoke({"input":"Can you Tell me about Langgraph?"}) 
+response=chain.invoke({"input":"Can you Tell me about Ollaima ?"}) 
 print(response)
 
 
