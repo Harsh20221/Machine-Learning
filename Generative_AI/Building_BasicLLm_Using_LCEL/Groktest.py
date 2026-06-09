@@ -15,5 +15,24 @@ messages=[
     HumanMessage(content="Hello How are you ")
 ]
 result = model.invoke(messages)
-print(result.content)
+##* The parser can help extract the output-only ( The result of out Query ) from the full response returned by the Model
+from langchain_core.output_parsers import StrOutputParser
+parser=StrOutputParser()
+parser.invoke(result) 
+###* USING LCEL to chain the components (Basically to Run the above code where we described the model and initialized the parser all at once)
+
+chain=model|parser
+chain.invoke(messages)
+
+
+##* Designing a Chat Template
+from langchain_core.prompts import ChatPromptTemplate
+
+generic_template="Translate the following into{language}"
+prompt=ChatPromptTemplate.from_messages(
+    [("system",generic_template),("user","{text}")]
+)
+output=prompt.invoke({"language":"Mandarin","text":"HELLO"})
+chain=prompt|model|parser
+chain.invoke({"language":"french","text":"Hello"})
 
