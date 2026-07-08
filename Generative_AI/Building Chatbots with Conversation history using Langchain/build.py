@@ -1,4 +1,22 @@
 import os
+from pathlib import Path
+
+
+def load_env_file(path: Path) -> None:
+    if not path.exists():
+        return
+
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        os.environ.setdefault(key, value)
+
+
 try:
     from dotenv import load_dotenv
 except ModuleNotFoundError:
@@ -6,7 +24,13 @@ except ModuleNotFoundError:
 
 if load_dotenv is not None:
     load_dotenv()
+else:
+    load_env_file(Path(__file__).with_name(".env"))
 groq_api_key=os.getenv('GROQ_API_KEY')
+if not groq_api_key:
+    raise SystemExit(
+        "GROQ_API_KEY is not set. Install python-dotenv or place a .env file next to build.py, then set GROQ_API_KEY before running build.py."
+    )
 for proxy_var in (
     'ALL_PROXY',
     'all_proxy',
@@ -21,6 +45,9 @@ for proxy_var in (
 ):
     os.environ.pop(proxy_var, None)
 
+
+### Fixes above are for cross device compatiblity 
+##--------------------------------------------------------------------------------------------------------------------
 ##* Importing the groq chat 
 from langchain_groq import ChatGroq
 ##* Initializing Model 
