@@ -150,7 +150,7 @@ response1=chain.invoke({"messages":[HumanMessage("Hi my name is Harsh")],"langua
 """ print(response1.content) """
 
 
-##* Passing / expereminting with above complexities along with message history 
+##* Passing / expereminting with above complexities along with *message history* 
 with_message_history=RunnableWithMessageHistory(
     chain,get_session_history, ##?Here we are using the old chain we created with our old prompt termplate instead of creating a new prompt template
     input_messages_key="messages"
@@ -178,7 +178,7 @@ trimmer=trim_messages(
 )
 
 ##* tESTING THE tRIMMER MODEL BY Using a demo conversation 
-messages=[
+messages=[ ###? The ai will remember this demo conversation
     HumanMessage(content="Hi I am harsh "),
     AIMessage(content="Hi Harsh How are You?"),
     HumanMessage(content="i AM FINE "),
@@ -193,5 +193,35 @@ messages=[
 
 output=trimmer.invoke(messages)##? Change the "max_tokens"(line-143) to allow how much part of messages to trim 
 
-print(output)
+""" print(output) """
+
+###* Testing the Trimmer with a Chain
+from operator import itemgetter
+from langchain_core.runnables import RunnablePassthrough
+
+chain=(
+    RunnablePassthrough.assign(messages=itemgetter("messages")|trimmer)|prompt1|model  
+)
+
+
+
+response2=chain.invoke({
+    "messages":messages+[HumanMessage(content="Hi My name is Aila")],"language":"English",
+})
+
+###* Combining THe above With message history 
+
+with_message_history=RunnableWithMessageHistory(
+    chain,get_session_history,input_messages_key="messages"
+)
+
+config5={"configurable":{"session_id":"chat5"}}##! Make sure the config is outside the RunnableWithMessagehistory Block
+
+### Invoking the above 
+response=with_message_history.invoke({"messages":messages+[HumanMessage(content="Hi My name is Aila")],"language":"English"},config=config5)
+
+print(response.content)
+
+
+
 
