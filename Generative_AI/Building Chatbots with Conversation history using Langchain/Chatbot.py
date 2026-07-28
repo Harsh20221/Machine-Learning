@@ -46,7 +46,19 @@ prompt= ChatPromptTemplate.from_messages(
 )
 
 
+##* Creating a Rag Chain 
+from lanchain-classic.chains.retrieval import create_retrieval_chains
+from langchain.chains.combine_documents import create_stuff_documents_chain
 
+question_answer_chain=create_stuff_document_chain(llm,prompt)
+ragchain=create_retreival_chain(retreiver,question_answer_chain)
+response=ragchain.invoke({"input":"What is Self Reflection"})
+
+##* Using RetrievalQA
+from langchain.chains import RetrievalQA
+
+qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
+answer = qa.run("What is Self Reflection")
 
 
 
